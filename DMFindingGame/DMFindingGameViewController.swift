@@ -42,7 +42,7 @@ class DMFindingGameViewController: UIViewController {
      3.3 Call the `updateTargetLetterLabel` and `updateLetterButtons` functions.
      */
     func newRound() {
-        let randomLetter = Int(arc4random_uniform(UInt32(letters.count)))
+        let randomLetter = Int.random(in: 1..<letters.count) //Int(arc4random_uniform(UInt32(letters.count)))
         targetLetter = letters[randomLetter]
         self.updateTargetLetterLabel()
         self.updateLetterButtons()
@@ -56,12 +56,9 @@ class DMFindingGameViewController: UIViewController {
      */
     func generateRandomLetters(numLetters: Int) -> [String] {
         randomLetters = []
-        for _ in 0..<numLetters {
-            let randLetter = Int(arc4random_uniform(26))
-            // How to prevent duplicate element in array
-            // If I use Set to control condition, it cans work
-            //but issue I assign number of letter through calling function
-            // Ex: let randomLetters = generateRandomLetters(numLetters: 9)
+        while randomLetters.count < numLetters {
+            let randLetter = Int.random(in: 1..<26)
+            guard !randomLetters.contains(letters[randLetter]) else { continue }
             randomLetters.append(letters[randLetter])
         }
         return randomLetters
@@ -110,6 +107,7 @@ class DMFindingGameViewController: UIViewController {
      */
     func updateLetterButtons() {
         let randomLetters = generateRandomLetters(numLetters: 9)
+        print(randomLetters)
         for i in 0..<randomLetters.count {
             letterButtons[i].titleLabel?.font = .systemFont(ofSize: 40)
             letterButtons[i].setTitle(randomLetters[i], for: .normal)
