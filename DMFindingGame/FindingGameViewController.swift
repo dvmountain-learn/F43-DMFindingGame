@@ -110,7 +110,16 @@ extension FindingGameViewController {
         }
     }
     
+    private func targetLabelTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.type = CATransitionType.fade
+        animation.duration = duration
+        targetLetterLabel.layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+    
     func newRound() {
+        self.targetLabelTransition(0.5)
         let randomLetter = Int.random(in: 1..<letters.count)
         targetLetter = letters[randomLetter]
         self.updateTargetLetterLabel()
