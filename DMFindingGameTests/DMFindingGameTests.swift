@@ -30,7 +30,7 @@ final class DMFindingGameTests: XCTestCase {
             viewController.targetLetter = targetLetter
             
             let numLetters = Int.random(in: 1...12)
-            let randomLetters = viewController.generateRandomLetters(numLetters: numLetters)
+            var randomLetters = viewController.generateRandomLetters(numLetters: numLetters)
             
             XCTAssertEqual(randomLetters.count, numLetters)
             XCTAssertEqual(Set(randomLetters).count, randomLetters.count)

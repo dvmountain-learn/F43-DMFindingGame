@@ -55,13 +55,20 @@ class DMFindingGameViewController: UIViewController {
      This is a tricky function, but feel free to run the provided test in `DMFindingGameTests` to know if your code is correct. Let your Tech Lead know if you need help. :)
      */
     func generateRandomLetters(numLetters: Int) -> [String] {
-        randomLetters = []
+        /*
+         Sure! We need to add the target letter to the array of
+         other letters on our own so the user can play the game.
+         For example, if the random letters array are [A, B, C, D],
+         and the target letter is O, we need to add O to the array on our own
+         so the array becomes [A, B, C, D, O].
+         */
+        randomLetters = [targetLetter]
         while randomLetters.count < numLetters {
             let randLetter = Int.random(in: 1..<26)
             guard !randomLetters.contains(letters[randLetter]) else { continue }
             randomLetters.append(letters[randLetter])
         }
-        return randomLetters
+        return randomLetters.shuffled()
     }
     
     /**
