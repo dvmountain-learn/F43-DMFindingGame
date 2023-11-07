@@ -90,10 +90,10 @@ extension FindingGameViewController {
         var index: Int = 0
         
         while index < 9 {
-            let hstack = UIStackView()
-            hstack.axis = .horizontal
-            hstack.distribution = .fillEqually
-            hstack.spacing = 20
+            let subStack = UIStackView()
+            subStack.axis = .horizontal
+            subStack.distribution = .fillEqually
+            subStack.spacing = 20
             for _ in 0..<3 {
                 if index < 9 {
                     let button = UIButton()
@@ -102,11 +102,11 @@ extension FindingGameViewController {
                     button.titleLabel?.font = .systemFont(ofSize: 35, weight: .regular)
                     button.backgroundColor = .systemBlue.withAlphaComponent(0.6)
                     letterButtons.append(button)
-                    hstack.addArrangedSubview(button)
+                    subStack.addArrangedSubview(button)
                 }
                 index += 1
             }
-            mainStackView.addArrangedSubview(hstack)
+            mainStackView.addArrangedSubview(subStack)
         }
     }
     
