@@ -116,8 +116,11 @@ class DMFindingGameViewController: UIViewController {
         let randomLetters = generateRandomLetters(numLetters: 9)
         print(randomLetters)
         for i in 0..<randomLetters.count {
-            letterButtons[i].titleLabel?.font = .systemFont(ofSize: 40)
+            letterButtons[i].titleLabel!.font = .boldSystemFont(ofSize: 40)
             letterButtons[i].setTitle(randomLetters[i], for: .normal)
+            letterButtons[i].layer.borderColor = UIColor.white.cgColor
+            letterButtons[i].layer.cornerRadius = 10
+            letterButtons[i].layer.borderWidth = 2
         }
     }
 }

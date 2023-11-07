@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15390DB72AFA94140071A95D /* FindingGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15390DB62AFA94140071A95D /* FindingGameViewController.swift */; };
+		15390DB82AFA94140071A95D /* FindingGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15390DB62AFA94140071A95D /* FindingGameViewController.swift */; };
 		6377940729A31E0900D08D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377940629A31E0900D08D42 /* AppDelegate.swift */; };
 		6377940929A31E0900D08D42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377940829A31E0900D08D42 /* SceneDelegate.swift */; };
 		6377940B29A31E0900D08D42 /* DMFindingGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6377940A29A31E0900D08D42 /* DMFindingGameViewController.swift */; };
@@ -27,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15390DB62AFA94140071A95D /* FindingGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindingGameViewController.swift; sourceTree = "<group>"; };
 		6377940329A31E0900D08D42 /* DMFindingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMFindingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6377940629A31E0900D08D42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6377940829A31E0900D08D42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 				6377940629A31E0900D08D42 /* AppDelegate.swift */,
 				6377940829A31E0900D08D42 /* SceneDelegate.swift */,
 				6377940A29A31E0900D08D42 /* DMFindingGameViewController.swift */,
+				15390DB62AFA94140071A95D /* FindingGameViewController.swift */,
 				6377940C29A31E0900D08D42 /* Main.storyboard */,
 				6377940F29A31E0A00D08D42 /* Assets.xcassets */,
 				6377941129A31E0A00D08D42 /* LaunchScreen.storyboard */,
@@ -143,7 +147,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					6377940229A31E0900D08D42 = {
 						CreatedOnToolsVersion = 14.0;
@@ -200,6 +204,7 @@
 			files = (
 				6377940B29A31E0900D08D42 /* DMFindingGameViewController.swift in Sources */,
 				6377940729A31E0900D08D42 /* AppDelegate.swift in Sources */,
+				15390DB72AFA94140071A95D /* FindingGameViewController.swift in Sources */,
 				6377940929A31E0900D08D42 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15390DB82AFA94140071A95D /* FindingGameViewController.swift in Sources */,
 				63F098E229B046BE00B97BC2 /* DMFindingGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +284,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -338,6 +345,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
