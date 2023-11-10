@@ -10,26 +10,24 @@ import XCTest
 
 final class DMFindingGameTests: XCTestCase {
     
-    var viewController: GameViewController!
+    var gameBrain: GameBrain!
     
     override func setUp() {
         super.setUp()
-        
-        viewController = GameViewController()
+        gameBrain = GameBrain()
     }
     
     override func tearDown() {
         super.tearDown()
-        
-        viewController = nil
+        gameBrain = nil
     }
     
     func testGenerateRandomLetters() {
         for _ in 1...100 {
             let numLetters = Int.random(in: 1...12)
-            viewController.gameBrain.newGame(numLetters: numLetters)
-            let randomLetters = viewController.gameBrain.generateRandomLetters()
-            let targetLetter = viewController.gameBrain.targetLetter
+            gameBrain.newGame(numLetters: numLetters)
+            let randomLetters = gameBrain.generateRandomLetters()
+            let targetLetter = gameBrain.targetLetter
             
             XCTAssertEqual(randomLetters.count, numLetters)
             XCTAssertEqual(Set(randomLetters).count, randomLetters.count)
@@ -39,23 +37,23 @@ final class DMFindingGameTests: XCTestCase {
     
     func testCalculateNewScore() {
         for _ in 1...100 {
-            let targetLetter = viewController.gameBrain.letters.randomElement()!
-            viewController.gameBrain.targetLetter = targetLetter
+            let targetLetter = gameBrain.letters.randomElement()!
+            gameBrain.targetLetter = targetLetter
             
             let randomScore = Int.random(in: 1...100)
-            viewController.gameBrain.score = randomScore
+            gameBrain.score = randomScore
             
             let userChoseCorrectLetter = Bool.random()
             
             if userChoseCorrectLetter {
-                viewController.gameBrain.letterSelected(letter: targetLetter)
-                XCTAssertEqual(viewController.gameBrain.score, randomScore + 1)
+                gameBrain.letterSelected(letter: targetLetter)
+                XCTAssertEqual(gameBrain.score, randomScore + 1)
             } else {
-                let filteredArray = viewController.gameBrain.letters.filter { $0 != targetLetter }
+                let filteredArray = gameBrain.letters.filter { $0 != targetLetter }
                 let randomLetter = filteredArray.randomElement()!
-                viewController.gameBrain.letterSelected(letter: randomLetter)
+                gameBrain.letterSelected(letter: randomLetter)
                 
-                XCTAssertEqual(viewController.gameBrain.score, randomScore)
+                XCTAssertEqual(gameBrain.score, randomScore)
             }
         }
     }
@@ -87,7 +85,6 @@ final class DMFindingGameTests: XCTestCase {
                     gameBrain.letterSelected(letter: randomLetter)
                     XCTAssertEqual(gameBrain.score, oldScore)
                 }
-                print(oldScore, oldHighScore)
                 XCTAssertEqual(gameBrain.highScore, max(oldHighScore, gameBrain.score))
             }
         }

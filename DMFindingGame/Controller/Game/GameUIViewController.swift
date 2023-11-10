@@ -60,9 +60,6 @@ class GameUIViewController: UIViewController {
         self.setupUI
         gameBrain.newGame(numLetters: 9)
         updateUI()
-        secondLabel.text = "Seconds: \(formatted(gameBrain.secondsRemaining))"
-        scoreLabel.text = "Score: \(formatted(gameBrain.score))"
-        targetLetterLabel.text = gameBrain.targetLetter
         configureTimer()
     }
     
@@ -145,11 +142,15 @@ extension GameUIViewController {
     func updateUI() {
         gameBrain.newRound()
         let letters = gameBrain.randomLetters
-        targetLetterLabel.text = gameBrain.targetLetter
         anyTransition(targetLetterLabel, 1.0)
+        secondLabel.text = "Seconds: \(gameBrain.secondsRemaining)"
+        scoreLabel.text = "Score: \(gameBrain.score)"
+        targetLetterLabel.text = gameBrain.targetLetter
+        
         for i in 0..<letters.count {
             letterButtons[i].setTitle(letters[i], for: .normal)
             letterButtons[i].backgroundColor = .systemCyan
+            letterButtons[i].backgroundColor = letters[i] == gameBrain.targetLetter ? .systemRed : .systemCyan
             letterButtons[i].layer.cornerRadius = 10
             anyTransition(letterButtons[i], 1.0)
             letterButtons[i].addTarget(self, action: #selector(clickActonButton(_:)), for: .touchUpInside)
@@ -158,8 +159,7 @@ extension GameUIViewController {
     
     func fireTimer(timer: Timer) {
         gameBrain.secondsRemaining -= 1
-        secondLabel.text = "Seconds: \(formatted(gameBrain.secondsRemaining))"
-//        updateUI()
+        updateUI()
 
         if gameBrain.secondsRemaining <= 0 {
             timer.invalidate()
@@ -169,13 +169,6 @@ extension GameUIViewController {
     
     @objc func clickActonButton(_ sender: UIButton) {
         gameBrain.letterSelected(letter: sender.titleLabel?.text ?? "")
-        scoreLabel.text = "Score: \(formatted(gameBrain.score))"
-        sender.backgroundColor = .systemRed
-        UIView.animate(withDuration: 3.0) {
-            sender.backgroundColor = .systemCyan
-        }
         updateUI()
     }
-    
-    
 }
