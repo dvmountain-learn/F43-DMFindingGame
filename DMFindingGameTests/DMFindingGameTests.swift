@@ -26,13 +26,11 @@ final class DMFindingGameTests: XCTestCase {
     
     func testGenerateRandomLetters() {
         for _ in 1...100 {
-            let targetLetter = viewController.gameBrain.letters.randomElement()!
-            viewController.gameBrain.targetLetter = targetLetter
-            
             let numLetters = Int.random(in: 1...12)
             viewController.gameBrain.newGame(numLetters: numLetters)
             let randomLetters = viewController.gameBrain.generateRandomLetters()
-            print(targetLetter, randomLetters)
+            let targetLetter = viewController.gameBrain.targetLetter
+            
             XCTAssertEqual(randomLetters.count, numLetters)
             XCTAssertEqual(Set(randomLetters).count, randomLetters.count)
             XCTAssertTrue(randomLetters.contains(targetLetter))

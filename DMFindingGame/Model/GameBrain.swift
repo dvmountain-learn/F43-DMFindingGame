@@ -21,6 +21,7 @@ class GameBrain {
     
     func generateRandomLetters() -> [String] {
         randomLetters = [targetLetter]
+        
         while randomLetters.count < numLetters {
             let randLetter = Int.random(in: 1..<letters.count)
             guard !randomLetters.contains(letters[randLetter]) else { continue }
