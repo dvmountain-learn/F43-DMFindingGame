@@ -1,5 +1,5 @@
 //
-//  FindingGameViewController.swift
+//  GameUIViewController.swift
 //  DMFindingGame
 //
 //  Created by SENGHORT KHEANG on 11/7/23.
@@ -7,13 +7,23 @@
 
 import UIKit
 
-class FindingGameViewController: UIViewController {
+class GameUIViewController: UIViewController {
     
     private let scoreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 40, weight: .bold)
-        label.text = "0"
+        label.font = .systemFont(ofSize: 25, weight: .bold)
+        label.text = "Score: 0"
+        label.textColor = .black
+        label.textAlignment = .right
+        return label
+    }()
+    
+    private let secondLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 25, weight: .bold)
+        label.text = "Seconds: 0"
         label.textColor = .black
         label.textAlignment = .right
         return label
@@ -41,27 +51,31 @@ class FindingGameViewController: UIViewController {
     
     private var letterButtons: [UIButton]! = []
     
-    var targetLetter = ""
-    var randomLetters = [String]()
-    var score = 0
-    let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    var timer: Timer!
+    let gameBrain = GameBrain.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.setupUI
-        self.newRound()
+        gameBrain.newGame(numLetters: 9)
+        updateUI()
+        secondLabel.text = "Seconds: \(formatted(gameBrain.secondsRemaining))"
+        scoreLabel.text = "Score: \(formatted(gameBrain.score))"
+        targetLetterLabel.text = gameBrain.targetLetter
+        configureTimer()
     }
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer.invalidate()
     }
 }
 
-extension FindingGameViewController {
+extension GameUIViewController {
     private var setupUI: () {
         view.addSubview(scoreLabel)
+        view.addSubview(secondLabel)
         view.addSubview(targetLetterLabel)
         view.addSubview(mainStackView)
         
@@ -69,16 +83,21 @@ extension FindingGameViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            scoreLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 25),
+            scoreLabel.topAnchor.constraint(equalTo: safeArea.topAnchor),
             scoreLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 25),
             scoreLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -25),
             scoreLabel.heightAnchor.constraint(equalToConstant: 40),
             
-            targetLetterLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 10),
+            secondLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor),
+            secondLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 25),
+            secondLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -25),
+            secondLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            targetLetterLabel.topAnchor.constraint(equalTo: secondLabel.bottomAnchor, constant: 10),
             targetLetterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             targetLetterLabel.heightAnchor.constraint(equalToConstant: 100),
             
-            mainStackView.topAnchor.constraint(equalTo: targetLetterLabel.bottomAnchor, constant: 50),
+            mainStackView.topAnchor.constraint(equalTo: targetLetterLabel.bottomAnchor, constant: 30),
             mainStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
             mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 25),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -25),
@@ -99,8 +118,8 @@ extension FindingGameViewController {
                     let button = UIButton()
                     button.translatesAutoresizingMaskIntoConstraints = false
                     button.setTitleColor(.white, for: .normal)
-                    button.titleLabel?.font = .systemFont(ofSize: 35, weight: .regular)
-                    button.backgroundColor = .systemBlue.withAlphaComponent(0.6)
+                    button.titleLabel?.font = .systemFont(ofSize: 30, weight: .regular)
+                    button.backgroundColor = .systemCyan
                     letterButtons.append(button)
                     subStack.addArrangedSubview(button)
                 }
@@ -118,54 +137,45 @@ extension FindingGameViewController {
         targetLetterLabel.layer.add(animation, forKey: CATransitionType.fade.rawValue)
     }
     
-    func newRound() {
-        self.targetLabelTransition(0.5)
-        let randomLetter = Int.random(in: 1..<letters.count)
-        targetLetter = letters[randomLetter]
-        self.updateTargetLetterLabel()
-        self.updateLetterButtons()
+    func configureTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: fireTimer(timer:))
+        RunLoop.current.add(timer, forMode: .common)
     }
     
-    
-    func generateRandomLetters(numLetters: Int) -> [String] {
-        randomLetters = [targetLetter]
-        while randomLetters.count < numLetters {
-            let randLetter = Int.random(in: 1..<26)
-            guard !randomLetters.contains(letters[randLetter]) else { continue }
-            randomLetters.append(letters[randLetter])
-        }
-        return randomLetters.shuffled()
-    }
-    
-    func calculateNewScore(selectedLetter: String) {
-        if (selectedLetter == targetLetter) {
-            score += 1
-        }
-    }
-    
-    func updateTargetLetterLabel() {
-        targetLetterLabel.text = targetLetter
-    }
-    
-    func updateScoreLabel() {
-        scoreLabel.text = String(format: "%d", score)
-    }
-    
-    func updateLetterButtons() {
-        let randomLetters = self.generateRandomLetters(numLetters: 9)
-        for i in 0..<randomLetters.count {
-            letterButtons[i].setTitle(randomLetters[i], for: .normal)
-            letterButtons[i].layer.borderColor = UIColor.white.cgColor
+    func updateUI() {
+        gameBrain.newRound()
+        let letters = gameBrain.randomLetters
+        targetLetterLabel.text = gameBrain.targetLetter
+        anyTransition(targetLetterLabel, 1.0)
+        for i in 0..<letters.count {
+            letterButtons[i].setTitle(letters[i], for: .normal)
+            letterButtons[i].backgroundColor = .systemCyan
             letterButtons[i].layer.cornerRadius = 10
-            letterButtons[i].layer.borderWidth = 2
+            anyTransition(letterButtons[i], 1.0)
             letterButtons[i].addTarget(self, action: #selector(clickActonButton(_:)), for: .touchUpInside)
         }
     }
     
-    @objc func clickActonButton(_ sender: UIButton) {
-        let button = sender.titleLabel
-        self.calculateNewScore(selectedLetter: button?.text ?? "")
-        self.updateScoreLabel()
-        self.newRound()
+    func fireTimer(timer: Timer) {
+        gameBrain.secondsRemaining -= 1
+        secondLabel.text = "Seconds: \(formatted(gameBrain.secondsRemaining))"
+//        updateUI()
+
+        if gameBrain.secondsRemaining <= 0 {
+            timer.invalidate()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
+    
+    @objc func clickActonButton(_ sender: UIButton) {
+        gameBrain.letterSelected(letter: sender.titleLabel?.text ?? "")
+        scoreLabel.text = "Score: \(formatted(gameBrain.score))"
+        sender.backgroundColor = .systemRed
+        UIView.animate(withDuration: 3.0) {
+            sender.backgroundColor = .systemCyan
+        }
+        updateUI()
+    }
+    
+    
 }

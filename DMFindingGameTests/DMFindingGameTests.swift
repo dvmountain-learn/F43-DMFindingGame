@@ -30,7 +30,7 @@ final class DMFindingGameTests: XCTestCase {
             viewController.targetLetter = targetLetter
             
             let numLetters = Int.random(in: 1...12)
-            var randomLetters = viewController.generateRandomLetters(numLetters: numLetters)
+            let randomLetters = viewController.generateRandomLetters(numLetters: numLetters)
             
             XCTAssertEqual(randomLetters.count, numLetters)
             XCTAssertEqual(Set(randomLetters).count, randomLetters.count)
@@ -57,6 +57,39 @@ final class DMFindingGameTests: XCTestCase {
                 viewController.calculateNewScore(selectedLetter: randomLetter)
                 
                 XCTAssertEqual(viewController.score, randomScore)
+            }
+        }
+    }
+    
+    func testGameplay() {
+        let gameBrain = GameBrain()
+        
+        for _ in 1...100 {
+            let numLetters = Int.random(in: 1...12)
+            gameBrain.newGame(numLetters: numLetters)
+            let oldHighScore = gameBrain.highScore
+            
+            XCTAssertEqual(gameBrain.randomLetters.count, numLetters)
+            XCTAssertEqual(Set(gameBrain.randomLetters).count, gameBrain.randomLetters.count)
+            XCTAssertTrue(gameBrain.randomLetters.contains(gameBrain.targetLetter))
+            XCTAssertEqual(gameBrain.score, 0)
+            
+            for _ in 1...50 {
+                let oldScore = gameBrain.score
+                
+                let userChoseCorrectLetter = Bool.random()
+                
+                if userChoseCorrectLetter {
+                    gameBrain.letterSelected(letter: gameBrain.targetLetter)
+                    XCTAssertEqual(gameBrain.score, oldScore + 1)
+                } else {
+                    let filteredArray = gameBrain.letters.filter { $0 != gameBrain.targetLetter }
+                    let randomLetter = filteredArray.randomElement()!
+                    gameBrain.letterSelected(letter: randomLetter)
+                    XCTAssertEqual(gameBrain.score, oldScore)
+                }
+                print(oldScore, oldHighScore)
+                XCTAssertEqual(gameBrain.highScore, max(oldHighScore, gameBrain.score))
             }
         }
     }

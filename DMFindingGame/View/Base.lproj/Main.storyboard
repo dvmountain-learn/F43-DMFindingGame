@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cLM-BX-Ev8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Byn-1g-K9h">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,40 +9,89 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Finding Game View Controller-->
+        <!--Start View Controller-->
+        <scene sceneID="n50-TG-F3J">
+            <objects>
+                <viewController id="c1t-Sp-cwt" customClass="StartViewController" customModule="DMFindingGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ur-xw-oTx">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DoQ-ZA-jDt">
+                                <rect key="frame" x="120" y="457.66666666666669" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="FQH-Wb-K3z"/>
+                                    <constraint firstAttribute="height" constant="50" id="sL4-Me-bXK"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start"/>
+                                <connections>
+                                    <action selector="startPressed:" destination="c1t-Sp-cwt" eventType="touchUpInside" id="SSu-Tm-dW1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score: 29" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ge6-c7-vSV">
+                                <rect key="frame" x="123" y="408.66666666666669" width="144" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gpc-PR-RtU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ge6-c7-vSV" firstAttribute="centerY" secondItem="Gpc-PR-RtU" secondAttribute="centerY" constant="-30" id="0Ks-12-Cc5"/>
+                            <constraint firstItem="DoQ-ZA-jDt" firstAttribute="centerX" secondItem="Gpc-PR-RtU" secondAttribute="centerX" id="Nes-0c-ebI"/>
+                            <constraint firstItem="Ge6-c7-vSV" firstAttribute="centerX" secondItem="Gpc-PR-RtU" secondAttribute="centerX" id="eb1-nm-j47"/>
+                            <constraint firstItem="DoQ-ZA-jDt" firstAttribute="top" secondItem="Ge6-c7-vSV" secondAttribute="bottom" constant="25" id="p63-vT-dMf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NNt-51-dH0"/>
+                    <connections>
+                        <outlet property="heigScoreLabel" destination="Ge6-c7-vSV" id="Hrb-aQ-Hdd"/>
+                        <outlet property="startButton" destination="DoQ-ZA-jDt" id="w1n-SY-FJR"/>
+                        <segue destination="cLM-BX-Ev8" kind="show" identifier="startGame" id="JZQ-co-ZgU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lIm-T9-xOn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="72.307692307692307" y="13.507109004739336"/>
+        </scene>
+        <!--Game View Controller-->
         <scene sceneID="uBD-Ng-N4y">
             <objects>
-                <viewController id="cLM-BX-Ev8" customClass="DMFindingGameViewController" customModule="DMFindingGame" sceneMemberID="viewController">
+                <viewController id="cLM-BX-Ev8" customClass="GameViewController" customModule="DMFindingGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8ZV-5E-ebi">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-wg-NBF">
-                                <rect key="frame" x="25" y="72" width="340" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-wg-NBF">
+                                <rect key="frame" x="25" y="116" width="340" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Dbo-RI-Fbb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="H" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pT-pe-6SL">
-                                <rect key="frame" x="179.66666666666666" y="127" width="31" height="48"/>
+                                <rect key="frame" x="179.66666666666666" y="186" width="31" height="48"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTK-Ee-vuO">
-                                <rect key="frame" x="25" y="225" width="340" height="535"/>
+                                <rect key="frame" x="25" y="284" width="340" height="476"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6Dq-qD-j1i">
-                                        <rect key="frame" x="0.0" y="0.0" width="340" height="535"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="340" height="476"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KWe-gi-bg5">
-                                                <rect key="frame" x="0.0" y="0.0" width="340" height="165"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="340" height="145.33333333333334"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbd-bO-o1i">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -50,23 +99,21 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="Gp7-Vt-r6y"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="Pe3-jC-Knh"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fo2-42-6Bd">
-                                                        <rect key="frame" x="120" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="120" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain">
-                                                            <attributedString key="attributedTitle"/>
-                                                        </buttonConfiguration>
+                                                        <buttonConfiguration key="configuration" style="plain" title=""/>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="htP-Jd-oCp"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="g5E-Gf-nFA"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbD-jl-vUG">
-                                                        <rect key="frame" x="240" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="240" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -74,28 +121,28 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="lBf-t8-O0c"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="dtb-nz-qfD"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OxG-nI-iO3">
-                                                <rect key="frame" x="0.0" y="185" width="340" height="165"/>
+                                                <rect key="frame" x="0.0" y="165.33333333333331" width="340" height="145.33333333333331"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyU-Wc-oZE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="165"/>
-                                                        <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="145.33333333333334"/>
+                                                        <color key="backgroundColor" red="0.4196078479" green="0.75294119120000003" blue="0.89803922179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain">
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="st3-kj-zed"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="3zH-hT-ykO"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgg-sk-QQQ">
-                                                        <rect key="frame" x="120" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="120" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -103,11 +150,11 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="afm-bp-6Ud"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="rJ6-bS-dQ8"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7km-uc-8hj">
-                                                        <rect key="frame" x="240" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="240" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -115,16 +162,16 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="COe-ty-iS0"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="rmi-7m-wFN"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ikG-s0-PI0">
-                                                <rect key="frame" x="0.0" y="370" width="340" height="165"/>
+                                                <rect key="frame" x="0.0" y="330.66666666666663" width="340" height="145.33333333333337"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m98-Y5-8Kr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -132,11 +179,11 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="gdn-iH-0In"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="tAX-Lj-C5R"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRQ-b8-QEM">
-                                                        <rect key="frame" x="120" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="120" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -144,11 +191,11 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="pZJ-l2-LlR"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="Usc-TX-hKx"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSS-AY-FAx">
-                                                        <rect key="frame" x="240" y="0.0" width="100" height="165"/>
+                                                        <rect key="frame" x="240" y="0.0" width="100" height="145.33333333333334"/>
                                                         <color key="backgroundColor" red="0.28039032220840454" green="0.76238924264907837" blue="0.91395300626754761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
@@ -156,7 +203,7 @@
                                                             <attributedString key="attributedTitle"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="clickActionButton:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="tKt-cK-WxS"/>
+                                                            <action selector="letterButtonTapped:" destination="cLM-BX-Ev8" eventType="touchUpInside" id="osj-I0-D0g"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -172,23 +219,37 @@
                                     <constraint firstItem="6Dq-qD-j1i" firstAttribute="top" secondItem="zTK-Ee-vuO" secondAttribute="top" id="ww5-yu-Qsd"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds: 20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuS-X4-bva">
+                                <rect key="frame" x="25" y="156" width="340" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="DDD-eb-vcQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8bc-M0-il6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="8bc-M0-il6" firstAttribute="trailing" secondItem="uuS-X4-bva" secondAttribute="trailing" constant="25" id="0jt-x4-bHi"/>
+                            <constraint firstItem="uuS-X4-bva" firstAttribute="top" secondItem="yPj-wg-NBF" secondAttribute="bottom" constant="10" id="4hZ-8I-dO2"/>
                             <constraint firstItem="yPj-wg-NBF" firstAttribute="top" secondItem="8bc-M0-il6" secondAttribute="top" constant="25" id="DGV-w8-PzE"/>
+                            <constraint firstItem="uuS-X4-bva" firstAttribute="leading" secondItem="8bc-M0-il6" secondAttribute="leading" constant="25" id="Dzb-Cz-Lzj"/>
                             <constraint firstItem="8bc-M0-il6" firstAttribute="bottom" secondItem="zTK-Ee-vuO" secondAttribute="bottom" constant="50" id="Y8i-yQ-KBZ"/>
+                            <constraint firstItem="5pT-pe-6SL" firstAttribute="top" secondItem="uuS-X4-bva" secondAttribute="bottom" constant="5" id="eUP-bE-vys"/>
                             <constraint firstItem="zTK-Ee-vuO" firstAttribute="leading" secondItem="8bc-M0-il6" secondAttribute="leading" constant="25" id="h1a-dW-y4O"/>
                             <constraint firstItem="yPj-wg-NBF" firstAttribute="leading" secondItem="8bc-M0-il6" secondAttribute="leading" constant="25" id="jVw-Cq-ac6"/>
                             <constraint firstItem="5pT-pe-6SL" firstAttribute="centerX" secondItem="8bc-M0-il6" secondAttribute="centerX" id="nJ2-Gl-qvj"/>
                             <constraint firstItem="zTK-Ee-vuO" firstAttribute="top" secondItem="5pT-pe-6SL" secondAttribute="bottom" constant="50" id="oDN-w9-81A"/>
                             <constraint firstItem="8bc-M0-il6" firstAttribute="trailing" secondItem="zTK-Ee-vuO" secondAttribute="trailing" constant="25" id="q8e-4x-5ql"/>
                             <constraint firstItem="8bc-M0-il6" firstAttribute="trailing" secondItem="yPj-wg-NBF" secondAttribute="trailing" constant="25" id="vKT-9Y-Dmx"/>
-                            <constraint firstItem="5pT-pe-6SL" firstAttribute="top" secondItem="yPj-wg-NBF" secondAttribute="bottom" constant="25" id="vds-On-AJW"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dk3-3Z-b8A"/>
                     <connections>
                         <outlet property="scoreLabel" destination="yPj-wg-NBF" id="Sak-Lk-STQ"/>
+                        <outlet property="secondLabel" destination="uuS-X4-bva" id="vjx-mZ-gI1"/>
                         <outlet property="targetLetterLabel" destination="5pT-pe-6SL" id="Htq-Hq-PlN"/>
                         <outletCollection property="letterButtons" destination="Kbd-bO-o1i" collectionClass="NSMutableArray" id="bdz-DR-1aD"/>
                         <outletCollection property="letterButtons" destination="Fo2-42-6Bd" collectionClass="NSMutableArray" id="o38-w7-LMA"/>
@@ -203,7 +264,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b22-Od-7or" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103" y="-9"/>
+            <point key="canvasLocation" x="1023.0769230769231" y="13.507109004739336"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nvO-9b-aCB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Byn-1g-K9h" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ehn-TM-YbL">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="c1t-Sp-cwt" kind="relationship" relationship="rootViewController" id="Wym-jn-YY5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSA-1F-mgn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-856.92307692307691" y="13.507109004739336"/>
         </scene>
     </scenes>
     <resources>
