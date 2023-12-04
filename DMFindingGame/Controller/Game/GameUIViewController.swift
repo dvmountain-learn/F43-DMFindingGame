@@ -98,8 +98,11 @@ extension GameUIViewController {
             mainStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
             mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 25),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -25),
-            
         ])
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain, target: self, action: #selector(backButtonTapped(_:)))
     }
     
     private var setupUIButton: () {
@@ -163,6 +166,9 @@ extension GameUIViewController {
 
         if gameBrain.secondsRemaining <= 0 {
             timer.invalidate()
+            if gameBrain.score > 0 {
+                CoreDataManager.shared.addScore(score: gameBrain.score)
+            }
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -170,5 +176,12 @@ extension GameUIViewController {
     @objc func clickActonButton(_ sender: UIButton) {
         gameBrain.letterSelected(letter: sender.titleLabel?.text ?? "")
         updateUI()
+    }
+    
+    @objc func backButtonTapped(_ sender: UIBarButtonItem) {
+        if gameBrain.score > 0 {
+            CoreDataManager.shared.addScore(score: gameBrain.score)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
 }

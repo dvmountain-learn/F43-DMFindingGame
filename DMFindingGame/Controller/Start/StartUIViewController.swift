@@ -29,8 +29,6 @@ class StartUIViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-    
-    var gameBrain = GameBrain.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +38,7 @@ class StartUIViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        heigScoreLabel.text = String(format: "Heig Score: %d", gameBrain.highScore)
+        heigScoreLabel.text = String(format: "Heig Score: %d", CoreDataManager.shared.calculateHighScore())
     }
 }
 

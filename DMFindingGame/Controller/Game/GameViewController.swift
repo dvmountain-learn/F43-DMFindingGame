@@ -32,6 +32,8 @@ class GameViewController: UIViewController {
     func configureTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: fireTimer(timer:))
         RunLoop.current.add(timer, forMode: .common)
+        secondLabel.text = "Seconds: \(gameBrain.secondsRemaining)"
+        print("\(gameBrain.secondsRemaining)")
     }
     
     func updateUI() {
@@ -57,8 +59,18 @@ class GameViewController: UIViewController {
 
         if gameBrain.secondsRemaining <= 0 {
             timer.invalidate()
+            if gameBrain.score > 0 {
+                CoreDataManager.shared.addScore(score: gameBrain.score)
+            }
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        if gameBrain.score > 0 {
+            CoreDataManager.shared.addScore(score: gameBrain.score)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func letterButtonTapped(_ sender: UIButton) {

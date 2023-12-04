@@ -10,9 +10,7 @@ import UIKit
 class StartViewController: UIViewController {
     @IBOutlet weak var heigScoreLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
-    
-    var gameBrain = GameBrain.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         startButton.layer.cornerRadius = 10
@@ -20,10 +18,19 @@ class StartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        heigScoreLabel.text = String(format: "Heig Score: %d", gameBrain.highScore)
+        heigScoreLabel.text = String(format: "Heig Score: %d", CoreDataManager.shared.calculateHighScore())
     }
     
     @IBAction func startPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "startGame", sender: self)
+    }
+    
+    @IBAction func seeAllScoreButtonTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segueScores", sender: self)
+    }
+    
+    @IBSegueAction
+    private func actionShowScores(coder: NSCoder) -> ScoresViewController? {
+        return ScoresViewController(coder: coder, scores: CoreDataManager.shared.fetchScores())
     }
 }

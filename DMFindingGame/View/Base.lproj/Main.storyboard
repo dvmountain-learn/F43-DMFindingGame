@@ -37,14 +37,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luR-4X-M3c">
+                                <rect key="frame" x="130.33333333333331" y="747" width="129.33333333333331" height="43"/>
+                                <color key="tintColor" red="0.141108804" green="0.66778647069999997" blue="0.96611279250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="See all scores"/>
+                                <connections>
+                                    <action selector="seeAllScoreButtonTapped:" destination="c1t-Sp-cwt" eventType="touchUpInside" id="lFI-XQ-8ha"/>
+                                    <segue destination="0us-Vs-147" kind="showDetail" identifier="segueScores" id="pOZ-0y-2l4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gpc-PR-RtU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ge6-c7-vSV" firstAttribute="centerY" secondItem="Gpc-PR-RtU" secondAttribute="centerY" constant="-30" id="0Ks-12-Cc5"/>
+                            <constraint firstItem="Gpc-PR-RtU" firstAttribute="bottom" secondItem="luR-4X-M3c" secondAttribute="bottom" constant="20" id="8DT-AJ-32m"/>
                             <constraint firstItem="DoQ-ZA-jDt" firstAttribute="centerX" secondItem="Gpc-PR-RtU" secondAttribute="centerX" id="Nes-0c-ebI"/>
                             <constraint firstItem="Ge6-c7-vSV" firstAttribute="centerX" secondItem="Gpc-PR-RtU" secondAttribute="centerX" id="eb1-nm-j47"/>
                             <constraint firstItem="DoQ-ZA-jDt" firstAttribute="top" secondItem="Ge6-c7-vSV" secondAttribute="bottom" constant="25" id="p63-vT-dMf"/>
+                            <constraint firstItem="luR-4X-M3c" firstAttribute="centerX" secondItem="Gpc-PR-RtU" secondAttribute="centerX" id="zHF-B7-xMB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NNt-51-dH0"/>
@@ -57,6 +69,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIm-T9-xOn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="72.307692307692307" y="13.507109004739336"/>
+        </scene>
+        <!--Scores View Controller-->
+        <scene sceneID="V0p-rF-Ksd">
+            <objects>
+                <viewController id="MGq-hr-zxj" customClass="ScoresViewController" customModule="DMFindingGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eu0-KQ-Cob">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="40a-p2-7GY">
+                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YKr-4u-gyX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YKr-4u-gyX" firstAttribute="trailing" secondItem="40a-p2-7GY" secondAttribute="trailing" id="FwY-RB-W5e"/>
+                            <constraint firstItem="YKr-4u-gyX" firstAttribute="bottom" secondItem="40a-p2-7GY" secondAttribute="bottom" id="QqZ-gh-sUc"/>
+                            <constraint firstItem="40a-p2-7GY" firstAttribute="top" secondItem="YKr-4u-gyX" secondAttribute="top" id="TC6-qA-1eA"/>
+                            <constraint firstItem="40a-p2-7GY" firstAttribute="leading" secondItem="YKr-4u-gyX" secondAttribute="leading" id="vC4-AP-KYA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="never" id="JgT-JE-CVx">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="0pK-gG-3Tp">
+                            <color key="tintColor" red="0.141108804" green="0.66778647069999997" blue="0.96611279250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="MGq-hr-zxj" id="axA-HN-iGA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="40a-p2-7GY" id="ci4-T9-kAw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wlC-P4-crg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1023" y="800"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="uBD-Ng-N4y">
@@ -246,7 +296,14 @@
                             <constraint firstItem="8bc-M0-il6" firstAttribute="trailing" secondItem="yPj-wg-NBF" secondAttribute="trailing" constant="25" id="vKT-9Y-Dmx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dk3-3Z-b8A"/>
+                    <navigationItem key="navigationItem" id="USc-XS-6N1">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="hw7-LN-sZS">
+                            <color key="tintColor" red="0.141108804" green="0.66778647069999997" blue="0.96611279250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="backButtonTapped:" destination="cLM-BX-Ev8" id="ycF-mh-AUK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="scoreLabel" destination="yPj-wg-NBF" id="Sak-Lk-STQ"/>
                         <outlet property="secondLabel" destination="uuS-X4-bva" id="vjx-mZ-gI1"/>
@@ -284,8 +341,28 @@
             </objects>
             <point key="canvasLocation" x="-856.92307692307691" y="13.507109004739336"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2gi-Qx-oPW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0us-Vs-147" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Vhh-6P-c6U">
+                        <rect key="frame" x="0.0" y="47" width="390" height="98"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MGq-hr-zxj" kind="relationship" relationship="rootViewController" destinationCreationSelector="actionShowScoresWithCoder:" id="SBy-dT-2so"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eHt-J8-InE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="72" y="800"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
