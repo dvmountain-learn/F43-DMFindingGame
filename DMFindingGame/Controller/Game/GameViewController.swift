@@ -32,8 +32,6 @@ class GameViewController: UIViewController {
     func configureTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: fireTimer(timer:))
         RunLoop.current.add(timer, forMode: .common)
-        secondLabel.text = "Seconds: \(gameBrain.secondsRemaining)"
-        print("\(gameBrain.secondsRemaining)")
     }
     
     func updateUI() {
@@ -55,7 +53,9 @@ class GameViewController: UIViewController {
     
     func fireTimer(timer: Timer) {
         gameBrain.secondsRemaining -= 1
-        updateUI()
+        // If you want to refresh random UIButton, please uncomment below code `updateUI()`
+        //updateUI()
+        secondLabel.text = "Seconds: \(gameBrain.secondsRemaining)"
 
         if gameBrain.secondsRemaining <= 0 {
             timer.invalidate()
